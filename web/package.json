@@ -15,7 +15,7 @@
     "@anthropic-ai/sdk": "0.54.0",
     "katex": "0.16.22",
     "motion": "12.18.1",
-    "next": "15.3.4",
+    "next": "15.3.8",
     "plotly.js-dist-min": "3.0.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
