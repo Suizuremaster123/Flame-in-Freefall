@@ -3,19 +3,18 @@
 // The one screen: product line, then Scenario | Run | Result, plus the receipt drawer and the print-only report header.
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { PRESETS } from "@/lib/sim/presets";
 import { spring } from "@/lib/ui/motion";
 import { fmtBand, sig } from "@/lib/ui/format";
-import { ScenarioPanel, applyPreset, fmtProv } from "./ScenarioPanel";
+import { ScenarioPanel, fmtProv } from "./ScenarioPanel";
 import { RunPanel } from "./RunPanel";
 import { ResultPanel } from "./ResultPanel";
 import { useSim } from "./store";
+import { Onboarding } from "./Onboarding";
 
 export const PRODUCT = "EmberAtlas is an SI-powered cabin fire simulator for spacecraft and lunar habitats. It's built from, ranks, and is checked against NASA's ISS fire experiments in PSI, so engineers can test a cabin design before flight and see exactly which NASA evidence backs every result.";
 
 export function SimApp() {
   const { a, topOpen, set } = useSim();
-  useEffect(() => { if (!useSim.getState().a && PRESETS[0]) applyPreset(PRESETS[0]); }, []);
   return (
     <div className="space-y-4">
       <div className="border-b border-line pb-3" data-noprint>
@@ -27,7 +26,7 @@ export function SimApp() {
           Built on NASA PSI Data Repository: Combustion Science</a>}
       </div>
       <PrintHeader />
-      {!a ? <p className="text-mute">Loading…</p> : (
+      {!a ? <Onboarding /> : (
         <div className="grid gap-4 lg:grid-cols-[300px_minmax(0,1fr)_360px]">
           <div className="min-w-0 lg:sticky lg:top-16 lg:max-h-[calc(100vh-80px)] lg:overflow-y-auto lg:pr-1" data-noprint><ScenarioPanel /></div>
           <div className="min-w-0"><RunPanel /></div>
